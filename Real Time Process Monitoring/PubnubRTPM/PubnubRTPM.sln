@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PubnubRTPM", "PubnubRTPM\PubnubRTPM.csproj", "{279576FE-9F44-4764-85D0-8141E7BF42CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PubNub-Messaging", "..\..\..\..\c-sharp-ppt97819676\csharp.net\PubNub-Messaging\PubNub-Messaging.csproj", "{B1ED98C3-FD0B-4B45-B0BE-40AFD37182CB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{279576FE-9F44-4764-85D0-8141E7BF42CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{279576FE-9F44-4764-85D0-8141E7BF42CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{279576FE-9F44-4764-85D0-8141E7BF42CF}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{279576FE-9F44-4764-85D0-8141E7BF42CF}.Debug|x86.Build.0 = Debug|Any CPU
+		{279576FE-9F44-4764-85D0-8141E7BF42CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{279576FE-9F44-4764-85D0-8141E7BF42CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{279576FE-9F44-4764-85D0-8141E7BF42CF}.Release|x86.ActiveCfg = Release|Any CPU
+		{279576FE-9F44-4764-85D0-8141E7BF42CF}.Release|x86.Build.0 = Release|Any CPU
+		{B1ED98C3-FD0B-4B45-B0BE-40AFD37182CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1ED98C3-FD0B-4B45-B0BE-40AFD37182CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1ED98C3-FD0B-4B45-B0BE-40AFD37182CB}.Debug|x86.ActiveCfg = Debug|x86
+		{B1ED98C3-FD0B-4B45-B0BE-40AFD37182CB}.Debug|x86.Build.0 = Debug|x86
+		{B1ED98C3-FD0B-4B45-B0BE-40AFD37182CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1ED98C3-FD0B-4B45-B0BE-40AFD37182CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1ED98C3-FD0B-4B45-B0BE-40AFD37182CB}.Release|x86.ActiveCfg = Release|x86
+		{B1ED98C3-FD0B-4B45-B0BE-40AFD37182CB}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
