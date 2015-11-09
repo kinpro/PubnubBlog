@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Machine>DESKTOP-BQ4JHUS</Machine>
+    <WindowsUser>tukunare</WindowsUser>
+    <TargetPlatformIdentifier>WindowsPhoneApp</TargetPlatformIdentifier>
+    <TargetOsVersion>6.3</TargetOsVersion>
+    <TargetOsDescription>Windows Phone 8.1</TargetOsDescription>
+    <SolutionConfiguration>Debug|AnyCPU</SolutionConfiguration>
+    <PackageArchitecture>neutral</PackageArchitecture>
+    <PackageIdentityName>352d6dba-fefb-4016-8937-54301a17ec87</PackageIdentityName>
+    <IntermediateOutputPath>X:\mobiDeasNovo\UpWork\PubNub\My Projects\Blog\Real Time Process Monitoring\PhoneRTPM\PhoneRTPM\obj\Debug\</IntermediateOutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <AppXManifest Include="X:\mobiDeasNovo\UpWork\PubNub\My Projects\Blog\Real Time Process Monitoring\PhoneRTPM\PhoneRTPM\bin\Debug\AppxManifest.xml">
+      <PackagePath>AppxManifest.xml</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppXManifest>
+  </ItemGroup>
+  <ItemGroup>
+    <AppxPackagedFile Include="X:\mobiDeasNovo\UpWork\PubNub\My Projects\Blog\Real Time Process Monitoring\PhoneRTPM\PhoneRTPM\bin\Debug\PhoneRTPM.exe">
+      <PackagePath>PhoneRTPM.exe</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="X:\mobiDeasNovo\UpWork\PubNub\c-sharp-ppt97819676\windows-phone-81\PubnubWindowsPhone\PubnubCore\bin\Debug\Newtonsoft.Json.dll">
+      <PackagePath>Newtonsoft.Json.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="X:\mobiDeasNovo\UpWork\PubNub\c-sharp-ppt97819676\windows-phone-81\PubnubWindowsPhone\PubnubCore\bin\Debug\PubnubCore.dll">
+      <PackagePath>PubnubCore.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="X:\mobiDeasNovo\UpWork\PubNub\My Projects\Blog\Real Time Process Monitoring\PhoneRTPM\PhoneRTPM\Assets\Logo.scale-240.png">
+      <PackagePath>Assets\Logo.scale-240.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="X:\mobiDeasNovo\UpWork\PubNub\My Projects\Blog\Real Time Process Monitoring\PhoneRTPM\PhoneRTPM\Assets\pubnub_large.png">
+      <PackagePath>Assets\pubnub_large.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="X:\mobiDeasNovo\UpWork\PubNub\My Projects\Blog\Real Time Process Monitoring\PhoneRTPM\PhoneRTPM\Assets\SmallLogo.scale-240.png">
+      <PackagePath>Assets\SmallLogo.scale-240.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="X:\mobiDeasNovo\UpWork\PubNub\My Projects\Blog\Real Time Process Monitoring\PhoneRTPM\PhoneRTPM\Assets\SplashScreen.scale-240.png">
+      <PackagePath>Assets\SplashScreen.scale-240.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="X:\mobiDeasNovo\UpWork\PubNub\My Projects\Blog\Real Time Process Monitoring\PhoneRTPM\PhoneRTPM\Assets\Square71x71Logo.scale-240.png">
+      <PackagePath>Assets\Square71x71Logo.scale-240.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="X:\mobiDeasNovo\UpWork\PubNub\My Projects\Blog\Real Time Process Monitoring\PhoneRTPM\PhoneRTPM\Assets\StoreLogo.scale-240.png">
+      <PackagePath>Assets\StoreLogo.scale-240.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="X:\mobiDeasNovo\UpWork\PubNub\My Projects\Blog\Real Time Process Monitoring\PhoneRTPM\PhoneRTPM\Assets\WideLogo.scale-240.png">
+      <PackagePath>Assets\WideLogo.scale-240.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="X:\mobiDeasNovo\UpWork\PubNub\My Projects\Blog\Real Time Process Monitoring\PhoneRTPM\PhoneRTPM\bin\Debug\PhoneRTPM.xr.xml">
+      <PackagePath>PhoneRTPM.xr.xml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="X:\mobiDeasNovo\UpWork\PubNub\My Projects\Blog\Real Time Process Monitoring\PhoneRTPM\PhoneRTPM\bin\Debug\App.xbf">
+      <PackagePath>App.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="X:\mobiDeasNovo\UpWork\PubNub\My Projects\Blog\Real Time Process Monitoring\PhoneRTPM\PhoneRTPM\bin\Debug\MainPage.xbf">
+      <PackagePath>MainPage.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="X:\mobiDeasNovo\UpWork\PubNub\My Projects\Blog\Real Time Process Monitoring\PhoneRTPM\PhoneRTPM\bin\Debug\resources.pri">
+      <PackagePath>resources.pri</PackagePath>
+    </AppxPackagedFile>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+</Project>

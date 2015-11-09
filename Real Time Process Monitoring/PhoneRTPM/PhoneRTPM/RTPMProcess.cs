@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace PubnubRTPM
+namespace PhoneRTPM
 {
     public class RTPMProcess
     {

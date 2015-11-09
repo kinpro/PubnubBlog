@@ -34,7 +34,7 @@ namespace PubnubRTPM
         /// <summary>
         /// The Max CPU Usage to alert in %
         /// </summary>
-        int MaxCPUUsage = 50;
+        int MaxCPUUsage = 1;//50;
         /// <summary>
         /// The min RAM available to alert in %
         /// </summary>
@@ -42,7 +42,7 @@ namespace PubnubRTPM
         /// <summary>
         /// The Period of Time to watch continue CPU usage in seconds
         /// </summary>
-        int Period = 60;
+        int Period = 10;//60;
 
 
         public Service()
@@ -127,49 +127,21 @@ namespace PubnubRTPM
                 PC.Close();
                 PC.Dispose();
 
+
+                PerformanceCounter ramCounter = new PerformanceCounter("Memory", "Available MBytes", true);
+                var ramValue = ramCounter.NextValue();
+                if (ramValue <= MinRAMAvailable)
+                {
+                    SendAlertMessage(AlertType.RAM_ALERT, value,Convert.ToInt64(ramValue));
+                }
+
+
                 if (value >= MaxCPUUsage)
                 {
                     totalHits = totalHits + 1;
                     if (totalHits == Period)
                     {
-                        List<RTPMProcess> list = new List<RTPMProcess>();
-                        lstPerformance = new List<PerformanceCounter>();
-                        Process[] processes = Process.GetProcesses();
-                        for (int i = 0; i < processes.Length; i++)
-                        {
-                            PerformanceCounter pc = new PerformanceCounter("Process", "% Processor Time", processes[i].ProcessName, true);
-                            try
-                            {
-                                pc.NextValue();
-                            }
-                            catch { }
-                            lstPerformance.Add(pc);
-                        }
-                        Thread.Sleep(1000);
-                        for (int i = 0; i < processes.Length; i++)
-                        {
-                            RTPMProcess r = new RTPMProcess();
-                            r.ProcessName = processes[i].ProcessName;
-                            r.Id = processes[i].Id;
-                            try
-                            {
-                                r.CPUUsage = lstPerformance[i].NextValue() / Environment.ProcessorCount;
-                            }
-                            catch { }
-                            list.Add(r);
-                        }
-
-                        var pList = (from pp in list orderby pp.CPUUsage descending select pp).ToList();
-
-                        mrePublish = new ManualResetEvent(false);
-                        RTPMServer rtpmServer = new RTPMServer();
-                        rtpmServer.ServerName = Environment.MachineName;
-                        rtpmServer.Processes = pList;
-                        publishedMessage = rtpmServer;
-                        pubnub.Publish<string>(channel, publishedMessage, PublishCallback, ErrorCallback);
-                        mrePublish.WaitOne(manualResetEventsWaitTimeout);
-
-
+                        SendAlertMessage(AlertType.PROCESS_ALERT, value, Convert.ToInt64(ramValue));
                         totalHits = 0;
                     }
                 }
@@ -178,17 +150,54 @@ namespace PubnubRTPM
                     totalHits = 0;
                 }
 
-                PerformanceCounter ramCounter = new PerformanceCounter("Memory", "Available MBytes", true);
-                var ramValue = ramCounter.NextValue();
-                if (ramValue<=MinRAMAvailable)
-                {
-                    mrePublish = new ManualResetEvent(false);
-                    publishedMessage = String.Format("RAM Alert! Less than {0}% available", MinRAMAvailable);
-                    pubnub.Publish<string>(channel, publishedMessage, PublishCallback, ErrorCallback);
-                    mrePublish.WaitOne(manualResetEventsWaitTimeout);
-                }
             }
             eventLog.WriteEntry(ServiceName +  " stoped.");
+        }
+
+        private void SendAlertMessage(AlertType alertType, double value, long ramValue)
+        {
+            List<RTPMProcess> list = new List<RTPMProcess>();
+            lstPerformance = new List<PerformanceCounter>();
+            Process[] processes = Process.GetProcesses();
+            for (int i = 0; i < processes.Length; i++)
+            {
+                PerformanceCounter pc = new PerformanceCounter("Process", "% Processor Time", processes[i].ProcessName, true);
+                try
+                {
+                    pc.NextValue();
+                }
+                catch { }
+                lstPerformance.Add(pc);
+            }
+            Thread.Sleep(1000);
+            for (int i = 0; i < processes.Length; i++)
+            {
+                RTPMProcess r = new RTPMProcess();
+                r.RAMUsage = processes[i].PrivateMemorySize64;
+                r.ProcessName = processes[i].ProcessName;
+                r.Id = processes[i].Id;
+                try
+                {
+                    r.CPUUsage = lstPerformance[i].NextValue() / Environment.ProcessorCount;
+                }
+                catch { }
+                list.Add(r);
+            }
+
+            var pList = (from pp in list orderby pp.CPUUsage descending select pp).ToList();
+
+            mrePublish = new ManualResetEvent(false);
+            RTPMServer rtpmServer = new RTPMServer();
+            rtpmServer.AlertType = alertType;
+            rtpmServer.Date = DateTime.UtcNow;
+            rtpmServer.ServerName = Environment.MachineName;
+            rtpmServer.CPUUsage = value;
+            rtpmServer.RAMUsage = ramValue;
+            rtpmServer.Processes = pList;
+            publishedMessage = rtpmServer;
+            pubnub.Publish<string>(channel, publishedMessage, PublishCallback, ErrorCallback);
+            mrePublish.WaitOne(manualResetEventsWaitTimeout);
+
         }
 
         protected override void OnStop()
