@@ -188,7 +188,7 @@ namespace PubnubRTPM
             rtpmServer.Date = DateTime.UtcNow;
             rtpmServer.ServerName = Environment.MachineName;
             rtpmServer.CPUUsage = value;
-            rtpmServer.RAMUsage = ramValue;
+            rtpmServer.RAMAvailable = ramValue;
             rtpmServer.Processes = pList;
             publishedMessage = rtpmServer;
             pubnub.Publish<string>(channel, publishedMessage, PublishCallback, ErrorCallback);

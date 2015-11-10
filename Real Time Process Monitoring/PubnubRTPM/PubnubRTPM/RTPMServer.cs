@@ -11,7 +11,7 @@ namespace PubnubRTPM
         public string ServerName { get; set; }
         public DateTime Date { get; set; }
         public double CPUUsage { get; set; }
-        public long RAMUsage { get; set; }
+        public long RAMAvailable { get; set; }
         public List<RTPMProcess> Processes { get; set; }
     }
 
