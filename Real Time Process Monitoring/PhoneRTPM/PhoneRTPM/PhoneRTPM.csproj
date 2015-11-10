@@ -121,9 +121,6 @@
       <HintPath>..\..\..\..\..\c-sharp-ppt97819676\windows-phone-81\PubnubWindowsPhone\PubnubCore\bin\Debug\PubnubCore.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="README.md" />
-  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
   </PropertyGroup>
