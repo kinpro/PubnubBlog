@@ -34,7 +34,7 @@ namespace PubnubRTPM
         /// <summary>
         /// The Max CPU Usage to alert in %
         /// </summary>
-        int MaxCPUUsage = 1;//50;
+        int MaxCPUUsage = 50;
         /// <summary>
         /// The min RAM available to alert in %
         /// </summary>
@@ -42,7 +42,7 @@ namespace PubnubRTPM
         /// <summary>
         /// The Period of Time to watch continue CPU usage in seconds
         /// </summary>
-        int Period = 10;//60;
+        int Period = 60;
 
 
         public Service()
@@ -91,7 +91,6 @@ namespace PubnubRTPM
 
             eventLog.WriteEntry("MaxCPUUsage=" + MaxCPUUsage.ToString() + ", " + "MinRAMAvailable=" + MinRAMAvailable.ToString() + ", " + "Period=" + Period.ToString());
 
-
             try
             {
                 eventLog.WriteEntry("Subscribe channel " + channel);
@@ -100,7 +99,7 @@ namespace PubnubRTPM
                 mrePubNub.WaitOne(manualResetEventsWaitTimeout);
                 eventLog.WriteEntry("Channel " + channel + " subscribed.");
 
-                trf = new Thread(new ThreadStart(ProcessTrf));
+                trf = new Thread(new ThreadStart(Process));
                 trf.IsBackground = true;
                 trf.SetApartmentState(ApartmentState.MTA);
                 trf.Start();
@@ -109,10 +108,9 @@ namespace PubnubRTPM
             {
                 eventLog.WriteEntry("Subscribe channel " + channel + "\r\n" + erro.Message);
             }
-
         }
 
-        private void ProcessTrf()
+        private void Process()
         {
             while (!finalizeService)
             {
@@ -127,14 +125,12 @@ namespace PubnubRTPM
                 PC.Close();
                 PC.Dispose();
 
-
                 PerformanceCounter ramCounter = new PerformanceCounter("Memory", "Available MBytes", true);
                 var ramValue = ramCounter.NextValue();
                 if (ramValue <= MinRAMAvailable)
                 {
                     SendAlertMessage(AlertType.RAM_ALERT, value,Convert.ToInt64(ramValue));
                 }
-
 
                 if (value >= MaxCPUUsage)
                 {
@@ -158,7 +154,7 @@ namespace PubnubRTPM
         {
             List<RTPMProcess> list = new List<RTPMProcess>();
             lstPerformance = new List<PerformanceCounter>();
-            Process[] processes = Process.GetProcesses();
+            Process[] processes = System.Diagnostics.Process.GetProcesses();
             for (int i = 0; i < processes.Length; i++)
             {
                 PerformanceCounter pc = new PerformanceCounter("Process", "% Processor Time", processes[i].ProcessName, true);
