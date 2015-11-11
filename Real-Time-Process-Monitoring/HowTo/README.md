@@ -230,7 +230,7 @@ You can receive Alert Messages from Real Time Process Monitoring Service. You al
 
 This Project is responsible to process Alert Message from **PNRTPM** channel.
 
-![Real Time Process Monitoring Logo](/images/windowsphone81.png?raw=true)
+![Real Time Process Monitoring Logo](https://raw.github.com/marceloinacio/PubnubBlog/master/Real-Time-Process-Monitoring/HowTo/images/windowsphone81.png)
 
 This is MainPage.xaml
 ``` xml
