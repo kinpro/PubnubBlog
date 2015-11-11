@@ -229,8 +229,7 @@ This is a Windows Phone 8.1 Project created using Visual Studio 2015 and Windows
 You can receive Alert Messages from Real Time Process Monitoring Service. You also receive messages from more than one server.
 
 This Project is responsible to process Alert Message from **PNRTPM** channel.
-
-![Real Time Process Monitoring Logo](https://github.com/marceloinacio/PubnubBlog/tree/master/Real-Time-Process-Monitoring/HowTo/images/windowsphone81.png)
+![Real Time Process Monitoring Logo](https://github.com/marceloinacio/PubnubBlog/tree/master/Real-Time-Process-Monitoring/HowTo/images/windowsphone81.png "Real Time Process Monitoring Windows 8.1")
 
 This is MainPage.xaml
 ``` xml
