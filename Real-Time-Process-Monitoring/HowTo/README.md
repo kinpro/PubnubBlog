@@ -230,7 +230,7 @@ You can receive Alert Messages from Real Time Process Monitoring Service. You al
 
 This Project is responsible to process Alert Message from **PNRTPM** channel.
 
-![Real Time Process Monitoring Logo](images/windowsphone81.png)
+![Real Time Process Monitoring Logo](https://github.com/marceloinacio/PubnubBlog/tree/master/Real-Time-Process-Monitoring/HowTo/images/windowsphone81.png)
 
 This is MainPage.xaml
 ``` xml
@@ -349,6 +349,6 @@ private void ReceivedMessageCallbackWhenSubscribed(string result)
 }
 ```
 
-You can download the Real Time Process Monitoring Service [here](https://github.com/marceloinacio/PubnubBlog/tree/master/Real%20Time%20Process%20Monitoring/PubnubRTPM)
+You can download the Real Time Process Monitoring Service [here](https://github.com/marceloinacio/PubnubBlog/tree/master/Real-Time-Process-Monitoring/PubnubRTPM)
 
-You can download the Real Time Process Monitoring Windows Phone 8.1 [here](https://github.com/marceloinacio/PubnubBlog/tree/master/Real%20Time%20Process%20Monitoring/PhoneRTPM)
+You can download the Real Time Process Monitoring Windows Phone 8.1 [here](https://github.com/marceloinacio/PubnubBlog/tree/master/Real-Time-Process-Monitoring/PhoneRTPM)
