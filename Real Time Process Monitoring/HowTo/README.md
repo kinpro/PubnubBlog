@@ -37,7 +37,7 @@ This method is in Service.cs file and is trigger when Windows starts the Service
 
 We subscribe to **PNRTPM** channel and a Thread is created to monitoring the server
 
-``` c sharp
+``` java
 protected override void OnStart(string[] args)
 {
     string[] imagePathArgs = Environment.GetCommandLineArgs();
@@ -99,7 +99,7 @@ This Thread uses a PerformanceCounter class to get the CPU usage and Available M
 
 Likewise, if Available Memory <= MinRAMAvailable, then a AlertType.RAM_ALERT message is send to channel.
 
-``` c sharp
+``` java
 private void Process()
 {
     while (!finalizeService)
@@ -149,7 +149,7 @@ To compose an Alert Message, a list of RTPMProcess is create getting CPU usage a
 
 After that, a RTPMServer class is create with the Alert Type, Date, Server Name, CPU Usage, Ram Available and RTPMProcessList and it's sent to the channel
 
-``` c sharp
+``` java
 private void SendAlertMessage(AlertType alertType, double value, long ramValue)
 {
     List<RTPMProcess> list = new List<RTPMProcess>();
@@ -203,7 +203,7 @@ This method is in Service.cs file and is trigger when Windows stops the Service.
 
 We unsubscribe **PNRTPM** channel and finalize a Thread that was create to monitoring the server
 
-``` c sharp
+``` java
 protected override void OnStop()
 {
     try
@@ -230,7 +230,7 @@ You can receive Alert Messages from Real Time Process Monitoring Service. You al
 
 This Project is responsible to process Alert Message from **PNRTPM** channel.
 
-![Real Time Process Monitoring Logo](/images/windowsphone81.png)
+![Real Time Process Monitoring Logo](images/windowsphone81.png)
 
 This is MainPage.xaml
 ``` xml
@@ -290,7 +290,7 @@ If you click on button Stop Monitoring, we unsubscribe **PNRTPM** channel.
 
 This method is in MainPage.xaml.cs file and is trigger when there is a message on **PNRTPM** channel.
 
-``` c sharp
+``` java
 private void ReceivedMessageCallbackWhenSubscribed(string result)
 {
     if (!string.IsNullOrEmpty(result) && !string.IsNullOrEmpty(result.Trim()))
