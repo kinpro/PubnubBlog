@@ -127,12 +127,12 @@ namespace PubnubRTPM
 
                 PerformanceCounter ramCounter = new PerformanceCounter("Memory", "Available MBytes", true);
                 var ramValue = ramCounter.NextValue();
-                if (ramValue <= MinRAMAvailable)
+                if (ramValue < MinRAMAvailable)
                 {
                     SendAlertMessage(AlertType.RAM_ALERT, value,Convert.ToInt64(ramValue));
                 }
 
-                if (value >= MaxCPUUsage)
+                if (value > MaxCPUUsage)
                 {
                     totalHits = totalHits + 1;
                     if (totalHits == Period)
