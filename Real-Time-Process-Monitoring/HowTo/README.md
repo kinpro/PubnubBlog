@@ -2,17 +2,19 @@
 
 Time is essential in a server environment. And when it comes to a possible failure we need to act fast!
 
-In this tutorial, we will build a Windows service application that monitors server processing and memory consumption, sending alerts to a Windows Phone 8.1.
+In this tutorial, we will build a Windows service application that monitors server processing load and memory consumption, sending alerts to a Windows Phone 8.1, with all communication through PubNub's Data Stream Network.
 
 The service starts a thread that will get CPU consumption and available memory and compares to parameters. If the CPU usage is greater than a threshold (MaxCPUUsage) for a certain length of time (Period) then send a message with the type `AlertType.PROCESS_ALERT` to the channel.
 
-Likewise, if available memory less than a threshold (MinRAMAvailable) then send a message with the type `AlertType.RAM_ALERT` to the channel.
+Likewise, if available memory is less than a threshold (MinRAMAvailable) then it will send a message with the type `AlertType.RAM_ALERT` to the channel.
 
 ## Real Time Process Monitoring Service
 
-This is a Windows service project created using Visual Studio 2015 and .Net Framework 4. This project is responsible to send alert message to **PNRTPM** channel.
+First is a Windows service project in the created using Visual Studio 2015 and .Net Framework 4. This service will send alert messages to the **PNRTPM** channel.
 
 ### Configuring parameters
+
+Next use RegEdit to configure the service parameters.
 
 >You can use RegEdit to configure tree parameters at HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PubnubRTPM
 
@@ -34,9 +36,9 @@ The period of time to watch continue CPU usage in seconds (default=60)
 
 ### OnStart Service Method
 
-This method is in the `service.cs` file and is triggered when Windows starts the service. 
+The `OnStart` method in the `service.cs` file is triggered when Windows starts the service.
 
-We subscribe to **PNRTPM** channel and a thread is created to monitor the server while service is running.
+It subscribes to the **PNRTPM** channel and creates a thread to monitor the server while the service is running.
 
 ``` csharp
 protected override void OnStart(string[] args)
@@ -94,11 +96,11 @@ protected override void OnStart(string[] args)
 
 ### Process Thread
 
-This thread is in the `service.cs` file and is started from `OnStart Service` method.
+The Process thread is in the `service.cs` file and is also started from the `OnStart` service method.
 
-This thread uses a `PerformanceCounter` class to get the CPU usage and available memory and compares with parameters. If the CPU usage is greater than a threshold (MaxCPUUsage) for a certain length of time (Period) then send a message with the type `AlertType.PROCESS_ALERT` to the channel.
+This thread uses a `PerformanceCounter` class to get the CPU usage and available memory and compares with parameters. If the CPU usage is greater than a threshold (MaxCPUUsage) for a certain length of time (Period) then it sends a message with the type `AlertType.PROCESS_ALERT` to the channel.
 
-Likewise, if available memory less than a threshold (MinRAMAvailable) then send a message with the type `AlertType.RAM_ALERT` to the channel.
+Likewise, if available memory is less than a threshold (MinRAMAvailable) then it sends a message with the type `AlertType.RAM_ALERT` to the channel.
 
 ``` csharp
 private void Process()
@@ -144,11 +146,11 @@ private void Process()
 
 ### Sending Alert Message
 
-This method is in the `service.cs` file and is started from `process` thread.
+The `SendAlertMessage` method is in the `service.cs` file and is started by the `process` thread.
 
-To compose an alert message, a list of `RTPMProcess` is created getting CPU usage and memory of each process.
+To compose an alert message, a list of `RTPMProcess` objects is created getting CPU usage and memory of each process.
 
-After that, a `RTPMServer` class is created with the `alert type, date, server name, CPU usage, RAM available, RTPMProcessList` and it's sent to the channel.
+After that, a `RTPMServer` class is created with the `alert type, date, server name, CPU usage, RAM available, RTPMProcessList` and then sent to the channel.
 
 ``` csharp
 private void SendAlertMessage(AlertType alertType, double value, long ramValue)
@@ -200,9 +202,9 @@ private void SendAlertMessage(AlertType alertType, double value, long ramValue)
 
 ### OnStop Service Method
 
-This method is in the `service.cs` file and is triggered when Windows stops the service. 
+The `OnStop` method is in the `service.cs` file and is triggered when Windows stops the service.
 
-We unsubscribe **PNRTPM** channel and finalize the thread that was created to monitor the server.
+This method unsubscribes from the **PNRTPM** channel and finalizes the thread that was created to monitor the server.
 
 ``` csharp
 protected override void OnStop()
@@ -225,15 +227,13 @@ protected override void OnStop()
 
 ## Real Time Process Monitoring Windows Phone 8.1
 
-This is a Windows Phone 8.1 project created using Visual Studio 2015 and Windows Phone 8.1 SDK
+The second part of our project is a Windows Phone 8.1 app created using Visual Studio 2015 and Windows Phone 8.1 SDK
 
-You can receive alert messages from Real Time Process Monitoring service. You also receive messages from more than one server.
-
-This project is responsible to process alert messages from **PNRTPM** channel.
+This app will receive alert messages from the Real Time Process Monitoring service. It can handle messages from more than one server, each over the **PNRTPM** channel.
 
 ![Real Time Process Monitoring Logo](https://raw.github.com/marceloinacio/PubnubBlog/master/Real-Time-Process-Monitoring/HowTo/images/windowsphone81.png)
 
-This is the `mainpage.xaml` of figure above using `XAML` notation. We created a grid for messages and a button to starts and stops monitoring.
+The `mainpage.xaml` file below creates the app seen above using `XAML` notation. It creates a grid for messages and a button to start and stop monitoring.
 ``` xml
 <Page
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -281,15 +281,15 @@ This is the `mainpage.xaml` of figure above using `XAML` notation. We created a 
 
 ### Start Monitoring
 
-When you click on button `Start Monitoring`, we subscribe to **PNRTPM** channel and wait for an alert message.
+When you click on the `Start Monitoring` button, it will subscribe to the **PNRTPM** channel and wait for an alert message.
 
 ### Stop Monitoring
 
-If you click on button `Stop Monitoring`, we unsubscribe **PNRTPM** channel.
+If you click on the `Stop Monitoring` button it will unsubscribe from the **PNRTPM** channel.
 
 ### Alert Message Received
 
-This method is in the `mainpage.xaml.cs` file and is triggered when there is a message on **PNRTPM** channel.
+The `ReceivedMessageCallbackWhenSubscribed` method is in the `mainpage.xaml.cs` file and is triggered when there is a message on **PNRTPM** channel.
 
 ``` csharp
 private void ReceivedMessageCallbackWhenSubscribed(string result)
@@ -352,10 +352,9 @@ private void ReceivedMessageCallbackWhenSubscribed(string result)
 
 ### Conclusion
 
-In this tutorial you can learn about Windows service, collecting CPU and memory information, Windows Phone 8.1 SDK and send/receive messages using Pubnub c-sharp SDK.
-We collected CPU and memory information using `PerformanceCounter` class and send messages using `publish` function.
+This tutorial showed you how to create a Windows service, collecting CPU and memory information, Windows Phone 8.1 SDK and send/receive messages using PubNub C# SDK. We collected CPU and memory information using the `PerformanceCounter` class and send messages using `publish` function.
 
-You can add an e-mail notification and SMS message on the service project to notify the administrator about CPU and memory consumption and also improve Windows Phone 8.1 project adding a window where the user could see all server processes and find out which is consuming the CPU or memory.
+In the future you could add an e-mail notification and SMS message on the service project to notify the administrator about CPU and memory consumption. You could also improve the Windows Phone 8.1 project by adding a window where the user could see all server processes and find out which is consuming the CPU or memory.
 
 You can download the Real Time Process Monitoring service project [here](https://github.com/marceloinacio/PubnubBlog/tree/master/Real-Time-Process-Monitoring/PubnubRTPM)
 
